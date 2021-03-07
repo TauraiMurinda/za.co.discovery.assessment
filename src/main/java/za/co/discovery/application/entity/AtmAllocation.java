@@ -4,6 +4,9 @@ package za.co.discovery.application.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,8 +22,13 @@ public class AtmAllocation implements java.io.Serializable {
 	@Id
 	@GeneratedValue
 	private int atmAllocationId;
-	private int atmId;
-	private int denominationId;
+	
+	@ManyToOne @JoinColumn(name="ATM_ID")
+	private Atm atm;
+	
+	@OneToOne @JoinColumn(name = "DENOMINATION_ID" )
+	private Denomination denominationId;
+	
 	private int count;
 
 }

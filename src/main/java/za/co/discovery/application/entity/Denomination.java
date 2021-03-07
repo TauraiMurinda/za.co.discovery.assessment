@@ -3,6 +3,8 @@ package za.co.discovery.application.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,8 +20,9 @@ public class Denomination implements java.io.Serializable {
 	@GeneratedValue
 	private int denominationId;
 	private long value;
-	private String denominationTypeCode;
+	
+	@ManyToOne @JoinColumn(name = "DENOMINATION_TYPE_CODE")
+	private DenominationType denominationType;
 
 	
-
 }

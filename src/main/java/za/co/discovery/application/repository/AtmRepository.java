@@ -9,9 +9,9 @@ import za.co.discovery.application.entity.Atm;
 
 public interface AtmRepository extends JpaRepository<Atm, Integer> {
 	
-	int getAtm(String location);
-	Set<Integer>getAtmallocations(int atm_id);
-	Set<String>getDenominations(Set<Integer> atmAllocation,Map<Integer,String> denominationtypes);
-	Map<Integer,String>getDenominationTypes(int atm_id,Set<String> denominations);
+//	int getAtm(String location);
+//	Set<Integer>getAtmallocations(int atm_id);
+//	Set<String>getDenominations(Set<Integer> atmAllocation,Map<Integer,String> denominationtypes);
+//	Map<Integer,String>getDenominationTypes(int atm_id,Set<String> denominations);
 	
 }
