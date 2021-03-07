@@ -17,13 +17,13 @@ public class SortTransactionAccountBalances{
 	List<ClientAccount>  clientAccounts;
 	Client client;
 	
-	AccountBalanceCalculator accountBalanceCalcular;
+	AccountBalanceCalculator accountBalanceCalculator;
 	
 	
-	LinkedList<Result> sort(Client client)
+	LinkedList<Result> sort(int  clientId)
           {
-		             this.clientAccounts= accountBalanceCalcular.getClientAccounts(client);
-		             LinkedList<Result> results = (LinkedList<Result>) accountBalanceCalcular.getBalances(clientAccounts);
+		             this.clientAccounts= accountBalanceCalculator.getClientAccounts(clientId);
+		             LinkedList<Result> results = (LinkedList<Result>) accountBalanceCalculator.getBalances(clientAccounts);
 		             Comparator<Result> comparator = Comparator.comparing(Result::getZar_amount).reversed(); //descending order
 					 return results.stream().sorted(comparator).collect(Collectors.toCollection(LinkedList::new));
 	     }

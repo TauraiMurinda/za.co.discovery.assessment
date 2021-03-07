@@ -2,6 +2,7 @@ package za.co.discovery.application.service.util;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -35,19 +36,19 @@ public class AccountBalanceCalculatorImpl  implements AccountBalanceCalculator {
 	 */
 	
 	@Override
-	public List<ClientAccount> getClientAccounts(Client client){
-		return ((ClientAccountRepository) accountBalance).findByClient(client);	
+	public List<ClientAccount> getClientAccounts(int clientId){
+		return ((ClientAccountRepository) accountBalance).findByClientId(clientId);	
 	}
 	
 	@Override
-	public List<ClientAccount> getClientAccounts(Client client,String  clientAccountNumber, String accountTypeCode){
-		return ((ClientAccountRepository) accountBalance).findByClientAndClientAccountNumberAndAccountTypeCode(client,clientAccountNumber,accountTypeCode);	
+	public List<ClientAccount> getClientAccounts(int clientId,String  clientAccountNumber, String accountTypeCode){
+		return ((ClientAccountRepository) accountBalance).findByClientIdAndClientAccountNumberAndAccountTypeCode(clientId,clientAccountNumber,accountTypeCode);	
 	}
 	
 	
 	@Override
-	public List<ClientAccount> getClientAccounts(Client client, String accountTypeCode){
-		return ((ClientAccountRepository) accountBalance).findByClientAndAccountTypeCode(client,accountTypeCode);	
+	public List<ClientAccount> getClientAccounts(int clientId, String accountTypeCode){
+		return ((ClientAccountRepository) accountBalance).findByClientIdAndAccountTypeCode(clientId,accountTypeCode);	
 	}
 	
 	@Override
@@ -70,7 +71,7 @@ public class AccountBalanceCalculatorImpl  implements AccountBalanceCalculator {
 				}).collect(Collectors.toList());
 		return results;		
 	}
-	
+
 	
 }
 
