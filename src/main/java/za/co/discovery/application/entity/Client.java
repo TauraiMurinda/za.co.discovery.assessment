@@ -1,6 +1,4 @@
 package za.co.discovery.application.entity;
-// Generated Mar 6, 2021, 3:37:31 PM by Hibernate Tools 5.4.27.Final
-
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -1,6 +1,7 @@
 package za.co.discovery.application.service.util;
 
-import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import za.co.discovery.application.repository.DenominationRepository;
 @Transactional
 public class NotesCalculatorImpl implements NotesCalculator {
 
+	
 	AtmRepository  atmRepository;
 	AtmAllocationRespository  atmAllocationRespository;
 	DenominationRepository denominationRepository;
@@ -26,8 +28,8 @@ public class NotesCalculatorImpl implements NotesCalculator {
 	Denomination denomination;
 	Atm atm;
 	AtmAllocation  AtmAllocation;
-
-  @Autowired
+	
+	@Autowired
 	private NotesCalculatorImpl(AtmRepository atmRepository, AtmAllocationRespository atmAllocationRespository,
 			DenominationRepository denominationRepository) {
 		super();
@@ -35,10 +37,10 @@ public class NotesCalculatorImpl implements NotesCalculator {
 		this.atmAllocationRespository = atmAllocationRespository;
 		this.denominationRepository = denominationRepository;
 	}
-  
-    
-  
-  
-	
+
+	public Set<Denomination> getDenominations(int atm_id){
+		return (TreeSet<Denomination>) atmAllocationRespository.getDenomination(atm_id);
+	}
+		
 
 }
