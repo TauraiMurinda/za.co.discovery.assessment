@@ -1,0 +1,96 @@
+{
+	"folders": {},
+	"connections": {
+		"h2_embedded-17803b1aded-2deba14ccef98c5c": {
+			"provider": "generic",
+			"driver": "h2_embedded",
+			"name": "data.",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"database": "jdbc:h2:tcp://localhost//~/data.",
+				"url": "jdbc:h2:jdbc:h2:tcp://localhost//~/data.",
+				"type": "dev",
+				"auth-model": "native"
+			}
+		},
+		"h2_embedded-17803be1f83-314d2afbec01a017": {
+			"provider": "generic",
+			"driver": "h2_embedded",
+			"name": "data",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"database": "jdbc:h2:tcp://localhost//~/data",
+				"url": "jdbc:h2:jdbc:h2:tcp://localhost//~/data",
+				"type": "dev",
+				"auth-model": "native"
+			}
+		},
+		"h2_embedded-17803ca1648-3ab73388a7ac9e3f": {
+			"provider": "generic",
+			"driver": "h2_embedded",
+			"name": "data. 2",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"database": "jdbc:h2:tcp://localhost//~/data.",
+				"url": "jdbc:h2:jdbc:h2:tcp://localhost//~/data.",
+				"type": "dev",
+				"auth-model": "native"
+			}
+		},
+		"h2_embedded-17804a308d7-f092f6231942c0b": {
+			"provider": "generic",
+			"driver": "h2_embedded",
+			"name": "sampledata",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"database": "/home/kk/Desktop/h5/sampledata",
+				"url": "jdbc:h2:/home/kk/Desktop/h5/sampledata",
+				"type": "dev",
+				"auth-model": "native",
+				"handlers": {}
+			}
+		},
+		"h2_embedded-17804a53ea5-6bec87f783e855b8": {
+			"provider": "generic",
+			"driver": "h2_embedded",
+			"name": "sampledata 2",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"database": "/home/kk/Desktop/h5/sampledata",
+				"url": "jdbc:h2:/home/kk/Desktop/h5/sampledata",
+				"type": "dev",
+				"auth-model": "native",
+				"handlers": {}
+			}
+		},
+		"h2_embedded-17804b7f208-1de7eab5d5c48e95": {
+			"provider": "generic",
+			"driver": "h2_embedded",
+			"name": "sampledata 3",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"database": "/home/kk/Desktop/h5/sampledata",
+				"url": "jdbc:h2:/home/kk/Desktop/h5/sampledata",
+				"type": "dev",
+				"auth-model": "native",
+				"handlers": {}
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false
+		}
+	}
+}
