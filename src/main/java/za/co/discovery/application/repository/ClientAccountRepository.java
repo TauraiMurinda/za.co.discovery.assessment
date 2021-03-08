@@ -20,10 +20,13 @@ public interface ClientAccountRepository extends JpaRepository<ClientAccount, St
     @Query("SELECT c_acc FROM ClientAccount c_acc  WHERE c_acc.clientAccountNumber=(:clientAccountNumber) AND c_acc.accountTypeCode= (:accountTypeCode)")
 	List<ClientAccount> findByClientAccountNumberAndAccountTypeCode(String clientAccountNumber, String accountTypeCode);
    
-    @Query("SELECT c_acc FROM ClientAccount c_acc  WHERE c_acc.clientAccountNumber=(:clientId) AND c_acc.accountTypeCode= (:accountTypeCode)")
+    @Query("SELECT c_acc FROM ClientAccount c_acc  WHERE c_acc.clientId=(:clientId) AND c_acc.accountTypeCode= (:accountTypeCode)")
 	List<ClientAccount> findByClientIdAndAccountTypeCode(int clientId, String accountTypeCode);
 
     @Query("SELECT c_acc FROM ClientAccount c_acc,Client clynt  WHERE clynt.clientId=(:clientId) and c_acc.clientAccountNumber=(:clientAccountNumber) AND c_acc.accountTypeCode= (:accountTypeCode)")
 	List<ClientAccount> findByClientIdAndClientAccountNumberAndAccountTypeCode(int clientId, String clientAccountNumber,String accountTypeCode);
+   
+    @Query("UPDATE ClientAccount c_acc1 SET c_acc1.displayBalance=(:newBalance) WHERE c_acc1.clientId=(:clientId) and c_acc1.clientAccountNumber=(:accountNumber)  ")
+	void saveBalance(int clientId, String accountNumber, double newBalance);
 
 }

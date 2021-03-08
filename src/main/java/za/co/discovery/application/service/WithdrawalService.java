@@ -1,12 +1,7 @@
 package za.co.discovery.application.service;
 
-import org.springframework.stereotype.Service;
+import za.co.discovery.application.exception.NoEnoughFundsException;
 
-/*The client account balance has been adjusted with the withdrawal amount 
-and the ATM has been notified of the number of notes per denomination to dispense*/
-@Service
-public class WithdrawalService {
-	
-	
-
-}
+public interface  WithdrawalService {
+		public Double amountWithdrawing(int clientId ,double amount) throws NoEnoughFundsException;	
+	}

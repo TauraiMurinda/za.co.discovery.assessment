@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 /*Find the transactional account per client with the highest balance
 */
 @Service
-@Transactional
+@Transactional(readOnly=true)
 public class TransactionalAccountHighestBalanceReportingService {
-
+        
 }

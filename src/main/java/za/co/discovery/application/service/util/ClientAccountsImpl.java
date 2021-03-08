@@ -8,13 +8,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import za.co.discovery.application.entity.ClientAccount;
 import za.co.discovery.application.repository.ClientAccountRepository;
-import za.co.discovery.application.service.AccountBalance;
+import za.co.discovery.application.service.CurrencyAccountBalances;
 
 @Component
 @Transactional
 public class ClientAccountsImpl implements ClientAccounts {
 
-	private AccountBalance accountBalance;
+	private CurrencyAccountBalances accountBalance;
 
 	
 	@Override

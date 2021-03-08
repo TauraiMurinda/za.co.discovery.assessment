@@ -11,7 +11,7 @@ import za.co.discovery.application.dto.CurrencyAccountBalancesDTO;
 import za.co.discovery.application.dto.TransactionalAccountBalancesDTO;
 import za.co.discovery.application.entity.ClientAccount;
 import za.co.discovery.application.repository.ClientAccountRepository;
-import za.co.discovery.application.service.AccountBalance;
+import za.co.discovery.application.service.CurrencyAccountBalances;
 
 
 
