@@ -26,7 +26,6 @@ public class SortTransactionAccountBalancesImpl  implements SortTransactionAccou
 	
 	
 	@Override
-	
 	public LinkedList<CurrencyAccountBalancesDTO> sort(int  clientId)
           {
 		             this.clientAccountsList= clientAccount.getClientAccounts(clientId);
