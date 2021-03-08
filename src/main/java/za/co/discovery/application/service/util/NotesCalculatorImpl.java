@@ -3,6 +3,7 @@ package za.co.discovery.application.service.util;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 import za.co.discovery.application.entity.Denomination;
 import za.co.discovery.application.repository.AtmAllocationRespository;
 
-@Service
+@Component
 @Transactional
 @AllArgsConstructor
 @NoArgsConstructor
