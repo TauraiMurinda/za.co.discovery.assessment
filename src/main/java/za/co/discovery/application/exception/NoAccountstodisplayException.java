@@ -1,7 +1,12 @@
 package za.co.discovery.application.exception;
 
 public class NoAccountstodisplayException extends Exception{
-   	public NoAccountstodisplayException(String message,Throwable cause){
+   	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public NoAccountstodisplayException(String message,Throwable cause){
 		  super(message,cause);
 	}
    

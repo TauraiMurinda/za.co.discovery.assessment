@@ -4,6 +4,11 @@ package za.co.discovery.application.exception;
 The system displays an error message “Amount not available, would you like to draw X” where X is the next available amount lower than the requested amount.*/
 public class ATM_Insufficient_cash_to_dispenseException extends RuntimeException {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public ATM_Insufficient_cash_to_dispenseException(String message,Throwable cause) {
 		  super(message,cause);
 	 }
