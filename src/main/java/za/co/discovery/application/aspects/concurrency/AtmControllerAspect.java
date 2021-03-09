@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 @Configuration
 public class AtmControllerAspect {
 	
-	 private ReentrantReadWriteLock rwLock;
+	    private ReentrantReadWriteLock rwLock;
 	    private Lock acquireReadLock;
 	    private Lock acquireWriteLock;
 	    
