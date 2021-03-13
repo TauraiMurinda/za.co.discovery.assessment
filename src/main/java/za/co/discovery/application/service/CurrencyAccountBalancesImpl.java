@@ -3,6 +3,7 @@ package za.co.discovery.application.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,8 +20,10 @@ with the highest balance in Rand displaying first and the lowest balance display
 @Transactional
 public class CurrencyAccountBalancesImpl implements  CurrencyAccountBalances{
 
-
+    @Autowired
 	AccountBalanceCalculator accountBalanceCalculator;
+	
+	@Autowired
 	ClientAccounts  clientAccounts;
 	List<ClientAccount>ClientAccountList;
 	List<CurrencyAccountBalancesDTO> currencyBalances;
@@ -30,6 +33,7 @@ public class CurrencyAccountBalancesImpl implements  CurrencyAccountBalances{
 		Client client = new Client();
 		client.setClientId(clientDTO.getClientId());
 		ClientAccountList=clientAccounts.getClientAccounts(client);
-		return currencyBalances=accountBalanceCalculator.getCurrencyAccountsBalances(ClientAccountList);
-	}
+		currencyBalances=accountBalanceCalculator.getCurrencyAccountsBalances(ClientAccountList);	
+		return currencyBalances;
+   }
 }

@@ -43,6 +43,7 @@ public class AtmController {
 	@Autowired
 	TransactionalAccountHighestBalanceReportingService transactionalAccountHighestBalanceTeportingService;
 
+	@Autowired
 	AtmController(ClientNetWorth clientNetWorth, WithdrawalService withdrawalService,
 			CurrencyAccountBalancesImpl currencyAccountBalances,
 			TransacationalAccountBalancesImpl transacationalAccountBalances,
@@ -65,9 +66,11 @@ public class AtmController {
 
 	@GetMapping(value = "/currencyAccountBalances", produces = "application/json")
 	@ResponseBody
-	public List<CurrencyAccountBalancesDTO> getCurrencyAccountBalances(@RequestBody ClientDTO clientDTO) {
-		List<CurrencyAccountBalancesDTO> currencyAccountBalances = getCurrencyAccountBalances(clientDTO);
-		return currencyAccountBalances;
+	public List<CurrencyAccountBalancesDTO> getCurrencyAccountBalances(@RequestParam String clientId) {
+		ClientDTO clientDTO=new ClientDTO() ;
+		clientDTO.setClientId(clientId);;
+		List<CurrencyAccountBalancesDTO> currencyAccountBal = currencyAccountBalances.displayCurrencyAccountBalances(clientDTO);				
+		return currencyAccountBal;
 	}
 
 	@GetMapping(value = "/clientNetworth", produces = "application/json")
