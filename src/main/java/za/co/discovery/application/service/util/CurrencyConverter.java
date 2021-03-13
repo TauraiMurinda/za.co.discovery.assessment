@@ -14,7 +14,7 @@ public interface CurrencyConverter {
 	return null;
 	}
    
- Float convert(String code, BigDecimal bigDecimal);
+ BigDecimal convert(String code, BigDecimal bigDecimal);
 
 default CurrencyConversionRate findByCurrency(String currencyCode) {
 		return null;

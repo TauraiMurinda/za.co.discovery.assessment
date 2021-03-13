@@ -1,6 +1,7 @@
 package za.co.discovery.application.service.util;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,7 +40,8 @@ public class AccountBalanceCalculatorImpl  implements AccountBalanceCalculator {
 					        dto.setAccountNumber(ca.getClientAccountNumber());
 					        String currency_code =ca.getCurrencyCode();
 					        dto.setCurrency(currency_code);
-					        Float zar_amount = currency_code.equals("ZAR") ? BigDecimal.valueOf(ca.getDisplayBalance()).floatValue() :currencyConverter.convert(ca.getCurrencyCode(), BigDecimal.valueOf(ca.getDisplayBalance()));
+					        dto.setCurrenceBalance(ca.getDisplayBalance());
+					        BigDecimal zar_amount = currency_code.trim().equals("ZAR") ? BigDecimal.valueOf(ca.getDisplayBalance()) : currencyConverter.convert(ca.getCurrencyCode(), BigDecimal.valueOf(ca.getDisplayBalance()));
 					        dto.setZarAmount(zar_amount);
 					        return dto;
 				}).collect(Collectors.toList());
@@ -55,7 +57,7 @@ public class AccountBalanceCalculatorImpl  implements AccountBalanceCalculator {
 					        dto.setAccountNumber(ca.getClientAccountNumber());
 					        dto.setAccountType(ca.getAccountTypeCode());
 					        String currency_code =ca.getCurrencyCode();
-					        Float zarAmount = currency_code.equals("ZAR") ? BigDecimal.valueOf(ca.getDisplayBalance()).floatValue() :currencyConverter.convert(ca.getCurrencyCode(), BigDecimal.valueOf(ca.getDisplayBalance()));
+					        BigDecimal zarAmount = currency_code.equals("ZAR") ? BigDecimal.valueOf(ca.getDisplayBalance()) :currencyConverter.convert(ca.getCurrencyCode(), BigDecimal.valueOf(ca.getDisplayBalance()));
 					        dto.setAccountBalance(zarAmount);
 					        return dto;
 				}).collect(Collectors.toList());

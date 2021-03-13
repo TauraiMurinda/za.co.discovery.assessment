@@ -32,7 +32,7 @@ public class CurrencyConverterImpl implements CurrencyConverter {
 
 
 	@Override
-	public Float convert(String currencyCode, BigDecimal amount) {
+	public BigDecimal convert(String currencyCode, BigDecimal amount) {
 		
 		MathContext precision = new MathContext(4); // example 2
 		amount.setScale(6);
@@ -40,7 +40,7 @@ public class CurrencyConverterImpl implements CurrencyConverter {
 		
 		if (CurrencyConversionRate!=null && isBaseCurrency(CurrencyConversionRate)) {
 		}
-		return amount.divide(CurrencyConversionRate.getRate(),2, RoundingMode.HALF_DOWN).floatValue();
+		return amount.divide(CurrencyConversionRate.getRate(),6, RoundingMode.HALF_DOWN);
 	}
 
 	private boolean isBaseCurrency(CurrencyConversionRate currencyConversionRate) {

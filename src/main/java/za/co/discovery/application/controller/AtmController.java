@@ -58,9 +58,10 @@ public class AtmController {
 
 	@GetMapping(value = "/transactionalAccountBalances", produces = "application/json")
 	@ResponseBody
-	public List<TransactionalAccountBalancesDTO> getTransactionalAccountBalances(@RequestBody ClientDTO clientDTO) {
-		List<TransactionalAccountBalancesDTO> transactionalAccountBalances = transacationalAccountBalances
-				.displayTransactionalAccountBalances(clientDTO);
+	public List<TransactionalAccountBalancesDTO> getTransactionalAccountBalances(@RequestParam String clientId) {
+		ClientDTO clientDTO=new ClientDTO() ;
+		clientDTO.setClientId(clientId);;
+		List<TransactionalAccountBalancesDTO> transactionalAccountBalances = transacationalAccountBalances.displayTransactionalAccountBalances(clientDTO);
 		return transactionalAccountBalances;
 	}
 

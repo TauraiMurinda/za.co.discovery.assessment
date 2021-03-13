@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 public class TransactionalAccountBalancesDTO {
 	 private  String AccountNumber;
 	 private String AccountType;
-	 private Float AccountBalance;
+	 private BigDecimal AccountBalance;
 }

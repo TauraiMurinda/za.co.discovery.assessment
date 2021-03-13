@@ -58,7 +58,7 @@ public class WithdrawalServiceImpl implements WithdrawalService {
 				                                             ;
 		System.out.println("******************************      "+transactionalAccount);
 
-		Float balanceAmount = transactionalAccount.get(0).getAccountBalance();
+		BigDecimal balanceAmount = transactionalAccount.get(0).getAccountBalance();
 		
 		System.out.println("----------------------------------------------------------------------------------------------");
 		System.out.println("----------------------------------------------------------------------------------------------");

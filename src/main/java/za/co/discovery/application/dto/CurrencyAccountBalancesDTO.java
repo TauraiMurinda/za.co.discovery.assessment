@@ -15,6 +15,6 @@ public class CurrencyAccountBalancesDTO {
 	 private  String AccountNumber;
 	 private String currency;
 	 private Long currenceBalance;
-	 private  Float ZarAmount;  
+	 private  BigDecimal ZarAmount;  
 
 }
