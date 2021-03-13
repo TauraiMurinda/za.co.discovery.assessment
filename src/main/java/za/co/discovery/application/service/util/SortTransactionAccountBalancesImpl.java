@@ -26,9 +26,9 @@ public class SortTransactionAccountBalancesImpl  implements SortTransactionAccou
 	
 	
 	@Override
-	public LinkedList<CurrencyAccountBalancesDTO> sort(int  clientId)
+	public LinkedList<CurrencyAccountBalancesDTO> sort(String  clientId)
           {
-		             this.clientAccountsList= clientAccount.getClientAccounts(clientId);
+		             this.clientAccountsList= clientAccount.getClientAccounts(client);
 		             LinkedList<CurrencyAccountBalancesDTO> results = (LinkedList<CurrencyAccountBalancesDTO>) accountBalanceCalculator.getCurrencyAccountsBalances(clientAccountsList);
 		             Comparator<CurrencyAccountBalancesDTO> comparator = Comparator.comparing(CurrencyAccountBalancesDTO::getZarAmount).reversed(); //descending order
 					 return results.stream().sorted(comparator).collect(Collectors.toCollection(LinkedList::new));

@@ -1,5 +1,11 @@
 package za.co.discovery.application.exception;
 
+import org.springframework.stereotype.Component;
+
+import lombok.NoArgsConstructor;
+
+@Component
+@NoArgsConstructor
 public class NoAccountstodisplayException extends Exception{
    	/**
 	 * 

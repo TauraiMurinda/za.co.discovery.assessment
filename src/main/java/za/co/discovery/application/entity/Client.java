@@ -16,7 +16,7 @@ public class Client implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue
-	private int clientId;
+	private String clientId;
 	private String title;
 	private String name;
 	private String surname;

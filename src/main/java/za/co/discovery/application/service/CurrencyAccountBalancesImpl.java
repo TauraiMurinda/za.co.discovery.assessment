@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import za.co.discovery.application.dto.ClientDTO;
 import za.co.discovery.application.dto.CurrencyAccountBalancesDTO;
+import za.co.discovery.application.entity.Client;
 import za.co.discovery.application.entity.ClientAccount;
 import za.co.discovery.application.service.util.AccountBalanceCalculator;
 import za.co.discovery.application.service.util.ClientAccounts;
@@ -26,7 +27,9 @@ public class CurrencyAccountBalancesImpl implements  CurrencyAccountBalances{
 	 
 	@Override
 	public List<CurrencyAccountBalancesDTO> displayCurrencyAccountBalances(ClientDTO clientDTO) {
-		ClientAccountList=clientAccounts.getClientAccounts(clientDTO.getClientId());
+		Client client = new Client();
+		client.setClientId(clientDTO.getClientId());
+		ClientAccountList=clientAccounts.getClientAccounts(client);
 		return currencyBalances=accountBalanceCalculator.getCurrencyAccountsBalances(ClientAccountList);
 	}
 }

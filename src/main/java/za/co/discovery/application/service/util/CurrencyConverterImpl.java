@@ -1,6 +1,8 @@
 package za.co.discovery.application.service.util;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,35 +11,42 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import za.co.discovery.application.entity.Currency;
-import za.co.discovery.application.repository.CurrencyRepository;
+import za.co.discovery.application.entity.CurrencyConversionRate;
+import za.co.discovery.application.repository.CurrencyConversionRateRepository;
 
 @Component
 @Transactional
 public class CurrencyConverterImpl implements CurrencyConverter {
-
-	private static final int Currency_conversion_rate = 0;
-
+	
 	@Autowired
-	private CurrencyRepository currencyRepository;
+	CurrencyConversionRateRepository  currencyConversionRateRepository;
+
+
+	
+	@Override
+	public CurrencyConversionRate findByCurrency(String currencyCode){
+		Currency currency = new Currency(currencyCode);
+		currency.setCurrencyCode(currencyCode);
+		return currencyConversionRateRepository.findByCurrency(currency);
+     	}
+
 
 	@Override
-	public Optional<Currency> findById(String code) {
-		return currencyRepository.findById(code);
-	}
-
-	@Override
-	public BigDecimal convert(String code, BigDecimal amount) {
-		Optional<Currency> optionalCurrency = findById(code);
-		if (optionalCurrency.isPresent() && isBaseCurrency(optionalCurrency)) {
-			return amount.multiply(new BigDecimal(Currency_conversion_rate));
+	public Float convert(String currencyCode, BigDecimal amount) {
+		
+		MathContext precision = new MathContext(4); // example 2
+		amount.setScale(6);
+		CurrencyConversionRate CurrencyConversionRate = findByCurrency(currencyCode);
+		
+		if (CurrencyConversionRate!=null && isBaseCurrency(CurrencyConversionRate)) {
 		}
-		return amount.divide(new BigDecimal(Currency_conversion_rate));
+		return amount.divide(CurrencyConversionRate.getRate(),2, RoundingMode.HALF_DOWN).floatValue();
 	}
 
-	private boolean isBaseCurrency(Optional<Currency> optionalCurrency) {
-		String code = optionalCurrency.get().getDescription();
-		return code.equals(BaseCurrencyCode.USD) || code.equals(BaseCurrencyCode.EUR)
-				|| code.equals(BaseCurrencyCode.GBP);
+	private boolean isBaseCurrency(CurrencyConversionRate currencyConversionRate) {
+		String currencyCode = currencyConversionRate.getCurrency().getCurrencyCode();
+		return currencyCode.equals(BaseCurrencyCode.USD) || currencyCode.equals(BaseCurrencyCode.EUR)
+				|| currencyCode.equals(BaseCurrencyCode.GBP);
 	}
 
 	

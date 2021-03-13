@@ -1,7 +1,13 @@
 package za.co.discovery.application.exception;
 
+import org.springframework.stereotype.Component;
+
+import lombok.NoArgsConstructor;
+
 /*The ATM does not have enough cash to dispense the required amount
 The system displays an error message “Amount not available, would you like to draw X” where X is the next available amount lower than the requested amount.*/
+@Component
+@NoArgsConstructor
 public class ATM_Insufficient_cash_to_dispenseException extends RuntimeException {
 	
 	/**

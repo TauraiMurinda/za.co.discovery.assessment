@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClientDTO {
-	private int clientId;
+	private String clientId;
 	private String title;
 	private String name;
 	private String surname;

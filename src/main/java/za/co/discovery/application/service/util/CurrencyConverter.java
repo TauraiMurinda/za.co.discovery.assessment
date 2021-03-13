@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 import za.co.discovery.application.entity.Currency;
+import za.co.discovery.application.entity.CurrencyConversionRate;
 
 
 
@@ -13,7 +14,11 @@ public interface CurrencyConverter {
 	return null;
 	}
    
- BigDecimal convert(String code, BigDecimal bigDecimal);	
+ Float convert(String code, BigDecimal bigDecimal);
+
+default CurrencyConversionRate findByCurrency(String currencyCode) {
+		return null;
+}	
 
 
 }

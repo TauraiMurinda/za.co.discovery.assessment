@@ -6,6 +6,6 @@ import za.co.discovery.application.dto.CurrencyAccountBalancesDTO;
 
 public interface SortTransactionAccountBalances {
 
-	LinkedList<CurrencyAccountBalancesDTO> sort(int clientId);
+	LinkedList<CurrencyAccountBalancesDTO> sort(String clientId);
 
 }

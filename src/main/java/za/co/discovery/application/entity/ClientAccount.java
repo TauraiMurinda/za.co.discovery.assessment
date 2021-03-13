@@ -25,7 +25,7 @@ public class ClientAccount implements java.io.Serializable {
 	@Id
 	private String clientAccountNumber;
 	@OneToOne(cascade = CascadeType.ALL) @JoinColumn(name ="clientId")
-	private Client clientId;
+	private Client client;
 	private String accountTypeCode;
 	private String currencyCode;
 	private Long displayBalance;

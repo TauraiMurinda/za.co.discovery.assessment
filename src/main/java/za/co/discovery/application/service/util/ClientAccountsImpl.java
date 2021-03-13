@@ -2,40 +2,43 @@ package za.co.discovery.application.service.util;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.discovery.application.entity.Client;
 import za.co.discovery.application.entity.ClientAccount;
 import za.co.discovery.application.repository.ClientAccountRepository;
-import za.co.discovery.application.service.CurrencyAccountBalances;
 
 @Component
 @Transactional
 public class ClientAccountsImpl implements ClientAccounts {
-
-	private CurrencyAccountBalances accountBalance;
+   
+	@Autowired
+	private ClientAccountRepository clientAccountRepository;
 
 	
+	
+	
 	@Override
-	public List<ClientAccount> getClientAccounts(int clientId){
-		return ((ClientAccountRepository) accountBalance).findByClientId(clientId);	
+	public List<ClientAccount> getClientAccounts(Client client){
+		return clientAccountRepository.findByClient(client);	
 	}
 	
 	@Override
-	public List<ClientAccount> getClientAccounts(int clientId,String  clientAccountNumber, String accountTypeCode){
-		return ((ClientAccountRepository) accountBalance).findByClientIdAndClientAccountNumberAndAccountTypeCode(clientId,clientAccountNumber,accountTypeCode);	
+	public List<ClientAccount> getClientAccounts(Client client,String  clientAccountNumber, String accountTypeCode){
+		return  clientAccountRepository.findByClientAndClientAccountNumberAndAccountTypeCode(client,clientAccountNumber,accountTypeCode);	
 	}
 	
 	
 	@Override
-	public List<ClientAccount> getClientAccounts(int clientId, String accountTypeCode){
-		return ((ClientAccountRepository) accountBalance).findByClientIdAndAccountTypeCode(clientId,accountTypeCode);	
+	public List<ClientAccount> getClientAccounts(Client client, String accountTypeCode){
+		return clientAccountRepository.findByClientAndAccountTypeCode(client,accountTypeCode);	
 	}
 	
 	@Override
 	public List<ClientAccount> getClientAccounts(String  clientAccountNumber, String accountTypeCode){
-		return ((ClientAccountRepository) accountBalance).findByClientAccountNumberAndAccountTypeCode(clientAccountNumber,accountTypeCode);	
+		return ((ClientAccountRepository) clientAccountRepository).findByClientAccountNumberAndAccountTypeCode(clientAccountNumber,accountTypeCode);	
 	}
 	
 }
