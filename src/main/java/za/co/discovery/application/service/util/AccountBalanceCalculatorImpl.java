@@ -34,8 +34,7 @@ public class AccountBalanceCalculatorImpl  implements AccountBalanceCalculator {
 	 *  converted rands amounts
 	 * currency accounts code
 	 */
-	
-	
+		
 	@Autowired
 	CurrencyConversionRateRepository  currencyConversionRateRepository;
 		
@@ -60,8 +59,7 @@ public class AccountBalanceCalculatorImpl  implements AccountBalanceCalculator {
 				}).collect(Collectors.toList());
 		return currencyAccountBalancesDTO;		
 	}
-	
-	
+		
 	@Override
 	public List<TransactionalAccountBalancesDTO> getTransactionalAccountsBalances(List<ClientAccount> transactionalAccounts) {
 		

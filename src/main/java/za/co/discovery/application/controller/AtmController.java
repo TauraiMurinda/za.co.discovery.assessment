@@ -1,9 +1,13 @@
 package za.co.discovery.application.controller;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -76,9 +80,22 @@ public class AtmController {
 
 	@GetMapping(value = "/clientNetworth", produces = "application/json")
 	@ResponseBody
-	public List<ClientNetworthDTO> getClientNetworth(@RequestBody ClientDTO clientDTO) {
-		List<ClientNetworthDTO> ClientNetworth = null;
-		return ClientNetworth;
+	public BigDecimal getClientNetworth(@RequestParam String clientId) {
+		
+		ClientDTO clientDTO=new ClientDTO() ;
+		clientDTO.setClientId(clientId);;
+		List<CurrencyAccountBalancesDTO> currencyAccountBal = currencyAccountBalances.displayCurrencyAccountBalances(clientDTO);
+		List<TransactionalAccountBalancesDTO> transactionalAccountBalances = transacationalAccountBalances.displayTransactionalAccountBalances(clientDTO);
+		
+		List<BigDecimal> list = currencyAccountBal.stream().map(predicate->predicate.getZarAmount()).collect(Collectors.toList());
+		Optional<BigDecimal> sum =  list.stream().reduce((a,b)->a.plus().add(b));
+		
+		
+		List<BigDecimal> lis = transactionalAccountBalances.stream().map(predicate->predicate.getAccountBalance()).collect(Collectors.toList());
+		Optional<BigDecimal> total =  lis.stream().reduce((a,b)->a.plus().add(b));
+		System.out.println(sum.get() + ":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::" + total.get());
+	
+		return sum.get().plus().add(total.get());
 	}
 
 	@GetMapping(value = "/transactionalAccountHighestBalances", produces = "application/json")
