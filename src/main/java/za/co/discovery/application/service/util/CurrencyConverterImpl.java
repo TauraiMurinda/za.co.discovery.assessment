@@ -34,17 +34,16 @@ public class CurrencyConverterImpl implements CurrencyConverter {
 	@Override
 	public BigDecimal convert(String currencyCode, BigDecimal amount) {
 		
-		MathContext precision = new MathContext(4); // example 2
 		amount.setScale(6);
 		CurrencyConversionRate CurrencyConversionRate = findByCurrency(currencyCode);
 		
-		if (CurrencyConversionRate!=null && isBaseCurrency(CurrencyConversionRate)) {
+		if (CurrencyConversionRate!=null && isBaseCurrency(currencyCode)) {
+			return amount.divide(CurrencyConversionRate.getRate(),6, RoundingMode.HALF_DOWN);
 		}
-		return amount.divide(CurrencyConversionRate.getRate(),6, RoundingMode.HALF_DOWN);
+		   return	amount.multiply(CurrencyConversionRate.getRate());
 	}
 
-	private boolean isBaseCurrency(CurrencyConversionRate currencyConversionRate) {
-		String currencyCode = currencyConversionRate.getCurrency().getCurrencyCode();
+	private boolean isBaseCurrency(String currencyCode) {
 		return currencyCode.equals(BaseCurrencyCode.USD) || currencyCode.equals(BaseCurrencyCode.EUR)
 				|| currencyCode.equals(BaseCurrencyCode.GBP);
 	}

@@ -12,7 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 import za.co.discovery.application.dto.CurrencyAccountBalancesDTO;
 import za.co.discovery.application.dto.TransactionalAccountBalancesDTO;
 import za.co.discovery.application.entity.ClientAccount;
+import za.co.discovery.application.entity.Currency;
+import za.co.discovery.application.entity.CurrencyConversionRate;
 import za.co.discovery.application.repository.ClientAccountRepository;
+import za.co.discovery.application.repository.CurrencyConversionRateRepository;
 import za.co.discovery.application.service.CurrencyAccountBalances;
 
 
@@ -31,17 +34,27 @@ public class AccountBalanceCalculatorImpl  implements AccountBalanceCalculator {
 	 *  converted rands amounts
 	 * currency accounts code
 	 */
+	
+	
+	@Autowired
+	CurrencyConversionRateRepository  currencyConversionRateRepository;
 		
 	@Override
-	public List<CurrencyAccountBalancesDTO> getCurrencyAccountsBalances(List<ClientAccount> currencyccounts) {
-			List<CurrencyAccountBalancesDTO> currencyAccountBalancesDTO = currencyccounts.stream().map(
+	public List<CurrencyAccountBalancesDTO> getCurrencyAccountsBalances(List<ClientAccount> currencyccounts) throws Throwable {
+		
+		List<ClientAccount>  currencyAccountBalancesDTOfilter = currencyccounts.stream().filter(predicate -> !(predicate.getCurrencyCode().equals("ZAR"))).collect(Collectors.toList());
+		
+		List<CurrencyAccountBalancesDTO> currencyAccountBalancesDTO = currencyAccountBalancesDTOfilter.stream().map(
 				(ClientAccount ca) ->{
+					Currency currency = new Currency(ca.getCurrencyCode());
+					CurrencyConversionRate CurrencyConversionRate = currencyConversionRateRepository.findByCurrency(currency);
 					     CurrencyAccountBalancesDTO dto = new CurrencyAccountBalancesDTO();
 					        dto.setAccountNumber(ca.getClientAccountNumber());
-					        String currency_code =ca.getCurrencyCode();
-					        dto.setCurrency(currency_code);
+					        dto.setCurrency(ca.getCurrencyCode());
 					        dto.setCurrenceBalance(ca.getDisplayBalance());
-					        BigDecimal zar_amount = currency_code.trim().equals("ZAR") ? BigDecimal.valueOf(ca.getDisplayBalance()) : currencyConverter.convert(ca.getCurrencyCode(), BigDecimal.valueOf(ca.getDisplayBalance()));
+					        dto.setCurrencyConversionRate(CurrencyConversionRate.getRate());
+					        					        
+					        BigDecimal zar_amount =  currencyConverter.convert(ca.getCurrencyCode(), BigDecimal.valueOf(ca.getDisplayBalance()));
 					        dto.setZarAmount(zar_amount);
 					        return dto;
 				}).collect(Collectors.toList());
@@ -51,13 +64,16 @@ public class AccountBalanceCalculatorImpl  implements AccountBalanceCalculator {
 	
 	@Override
 	public List<TransactionalAccountBalancesDTO> getTransactionalAccountsBalances(List<ClientAccount> transactionalAccounts) {
-			List<TransactionalAccountBalancesDTO> transactionalAccountBalancesDTO = transactionalAccounts.stream().map(
+		
+		List<ClientAccount>  transactionalBalancesDTOfilter = transactionalAccounts.stream().filter(predicate -> predicate.getCurrencyCode().equals("ZAR")).collect(Collectors.toList());
+
+			List<TransactionalAccountBalancesDTO> transactionalAccountBalancesDTO = transactionalBalancesDTOfilter.stream().map(
 				(ClientAccount ca) ->{
 					     TransactionalAccountBalancesDTO dto = new TransactionalAccountBalancesDTO();
 					        dto.setAccountNumber(ca.getClientAccountNumber());
 					        dto.setAccountType(ca.getAccountTypeCode());
 					        String currency_code =ca.getCurrencyCode();
-					        BigDecimal zarAmount = currency_code.equals("ZAR") ? BigDecimal.valueOf(ca.getDisplayBalance()) :currencyConverter.convert(ca.getCurrencyCode(), BigDecimal.valueOf(ca.getDisplayBalance()));
+					        BigDecimal zarAmount =  BigDecimal.valueOf(ca.getDisplayBalance());
 					        dto.setAccountBalance(zarAmount);
 					        return dto;
 				}).collect(Collectors.toList());

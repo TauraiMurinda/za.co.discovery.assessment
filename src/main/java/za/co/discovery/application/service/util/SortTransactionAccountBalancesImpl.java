@@ -29,7 +29,13 @@ public class SortTransactionAccountBalancesImpl  implements SortTransactionAccou
 	public LinkedList<CurrencyAccountBalancesDTO> sort(String  clientId)
           {
 		             this.clientAccountsList= clientAccount.getClientAccounts(client);
-		             LinkedList<CurrencyAccountBalancesDTO> results = (LinkedList<CurrencyAccountBalancesDTO>) accountBalanceCalculator.getCurrencyAccountsBalances(clientAccountsList);
+		             LinkedList<CurrencyAccountBalancesDTO> results = null;
+					try {
+						results = (LinkedList<CurrencyAccountBalancesDTO>) accountBalanceCalculator.getCurrencyAccountsBalances(clientAccountsList);
+					} catch (Throwable e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 		             Comparator<CurrencyAccountBalancesDTO> comparator = Comparator.comparing(CurrencyAccountBalancesDTO::getZarAmount).reversed(); //descending order
 					 return results.stream().sorted(comparator).collect(Collectors.toCollection(LinkedList::new));
 	     }

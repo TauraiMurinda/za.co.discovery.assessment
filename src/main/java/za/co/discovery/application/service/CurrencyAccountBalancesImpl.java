@@ -33,7 +33,12 @@ public class CurrencyAccountBalancesImpl implements  CurrencyAccountBalances{
 		Client client = new Client();
 		client.setClientId(clientDTO.getClientId());
 		ClientAccountList=clientAccounts.getClientAccounts(client);
-		currencyBalances=accountBalanceCalculator.getCurrencyAccountsBalances(ClientAccountList);	
+		try {
+			currencyBalances=accountBalanceCalculator.getCurrencyAccountsBalances(ClientAccountList);
+		} catch (Throwable e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 		return currencyBalances;
    }
 }

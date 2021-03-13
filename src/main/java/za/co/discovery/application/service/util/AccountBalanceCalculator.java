@@ -13,6 +13,6 @@ public interface AccountBalanceCalculator {
 
 	List<TransactionalAccountBalancesDTO> getTransactionalAccountsBalances(List<ClientAccount> transactionalAccounts);
 
-	List<CurrencyAccountBalancesDTO> getCurrencyAccountsBalances(List<ClientAccount> currencyccounts);
+	List<CurrencyAccountBalancesDTO> getCurrencyAccountsBalances(List<ClientAccount> currencyccounts) throws Throwable;
 
 }
